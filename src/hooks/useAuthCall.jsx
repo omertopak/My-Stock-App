@@ -2,22 +2,28 @@ import axios from "axios"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify"
+import { fetchStart,loginSuccess } from "../features/authSlice"
+
 
 const useAuthCall = () => {
+    
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
-
    const login = async(userData) =>{
-    dispatch(fetchstart())
-
+    
+ 
+    dispatch(fetchStart())
+    
     try {
         const {data} = await axios.post(
             `${import.meta.env.VITE_BASE_URL}account/auth/login/`, userData
         ) 
-        dispatch(loginSuccess)
+        console.log(data);
+        dispatch(loginSuccess(data))
         navigate("/stock")
-        toastSuccessNotify()
+        toastSuccessNotify("basarili")
+        
+        
     } catch (error) {
         console.log(error);
         toastErrorNotify()
@@ -26,6 +32,6 @@ const useAuthCall = () => {
    }
 
   return {login}
-}
+};
 
-export default useAuthCall
+export default useAuthCall;
