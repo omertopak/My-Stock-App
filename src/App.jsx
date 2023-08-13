@@ -4,6 +4,7 @@ import { grey, blueGrey } from "@mui/material/colors";
 import { Provider } from "react-redux";
 import store from "./app/store";
 import { ToastContainer } from "react-toastify";
+import { BrowserRouter } from 'react-router-dom'
 
 function App() {
   const theme = createTheme({

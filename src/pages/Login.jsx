@@ -7,15 +7,29 @@ import image from "../assets/result.svg"
 import { Link } from "react-router-dom"
 import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField"
-import { Button } from "@mui/material"
-import { Formik, Form } from 'formik';
-import { string } from "yup"
+import Button from "@mui/material/Button"
+import { Formik, Form } from "formik"
+import { object, string } from "yup"
+// import { login } from "../hooks/useAuthCall"
+import useAuthCall from "../hooks/useAuthCall"
 
 const Login = () => {
-  const loginSchema = {
-    email: string().email().required(),
-    password: string().required().min(8).matches(/\d+/),
-  }
+  const { login } = useAuthCall()
+
+  //? harici validasyon şemasi
+  const loginSchema = object({
+    email: string()
+      .email("Lutfen valid bir email giriniz")
+      .required("Bu alan zorunludur"),
+    password: string()
+      .required("Bu alan zorunludur")
+      .min(8, "En az 8 karakter girilmelidir")
+      .max(16, "En fazla 16 karakter girilmelidir")
+      .matches(/\d+/, "En az bir rakam içermelidir.")
+      .matches(/[a-z]/, "En az bir küçük harf içermelidir.")
+      .matches(/[A-Z]/, "En az bir büyük harf içermelidir.")
+      .matches(/[!,?{}><%&$#£+-.]+/, "En az bir özel karekter içermelidir."),
+  })
 
   return (
     <Container maxWidth="lg">
@@ -53,48 +67,50 @@ const Login = () => {
           >
             Login
           </Typography>
-                        <Formik
-                          initialValues={{email:"",password:""}}
-                          validationSchema={loginSchema}
-                          onSubmit={(values,actions)=>{
-                            login(values)
-                          }}
-                            >
 
-                              {({handleBlur,handleChange,values,errors})=>(
-                          <Form>
-                            <Box
-                              component="form"
-                              sx={{ display: "flex", flexDirection: "column", gap: 2 }}
-                            >
-                              
-                              <TextField
-                                label="Email"
-                                name="email"
-                                id="email"
-                                type="email"
-                                variant="outlined"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.email}
-                                
-                              />
-                              <TextField
-                                label="password"
-                                name="password"
-                                id="password"
-                                type="password"
-                                variant="outlined"
-                                onChange={handleChange}
-                                value={values.password}
-                              />
-                              <Button variant="contained" type="submit">
-                                Submit
-                              </Button>
-                            </Box>
-                          </Form>
-)}
-                        </Formik>
+          <Formik
+            initialValues={{ email: "", password: "" }}
+            validationSchema={loginSchema}
+            onSubmit={(values, action) => {
+              login(values)
+              action.resetForm()
+              action.setSubmitting(false)
+            }}
+          >
+            {({ handleChange, handleBlur, values, touched, errors }) => (
+              <Form>
+                <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                  <TextField
+                    label="Email"
+                    name="email"
+                    id="email"
+                    type="email"
+                    variant="outlined"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                    error={touched.email && Boolean(errors.email)}
+                    helperText={errors.email}
+                  />
+                  <TextField
+                    label="password"
+                    name="password"
+                    id="password"
+                    type="password"
+                    variant="outlined"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.password}
+                    error={touched.password && Boolean(errors.password)}
+                    helperText={errors.password}
+                  />
+                  <Button variant="contained" type="submit">
+                    Submit
+                  </Button>
+                </Box>
+              </Form>
+            )}
+          </Formik>
 
           <Box sx={{ textAlign: "center", mt: 2 }}>
             <Link to="/register">Do you have not an account?</Link>
