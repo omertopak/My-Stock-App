@@ -6,13 +6,38 @@ import image from "../assets/result.svg"
 import Grid from "@mui/material/Grid"
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
-import { Link, useNavigate } from "react-router-dom"
-
+import { Link } from "react-router-dom"
 import TextField from "@mui/material/TextField"
+import { Formik, Form } from "formik"
+import useAuthCall from "../hooks/useAuthCall"
+import { object, string } from "yup"
+
+
+
+
 
 const Register = () => {
-  const navigate = useNavigate()
 
+
+  const { register } = useAuthCall()
+  
+
+  // const registerSchema = object({
+  //   email: string()
+  //     .email("Lutfen valid bir email giriniz")
+  //     .required("Bu alan zorunludur"),
+  //   password: string()
+  //     .required("Bu alan zorunludur")
+  //     .min(8, "En az 8 karakter girilmelidir")
+  //     .max(16, "En fazla 16 karakter girilmelidir")
+  //     .matches(/\d+/, "En az bir rakam içermelidir.")
+  //     .matches(/[a-z]/, "En az bir küçük harf içermelidir.")
+  //     .matches(/[A-Z]/, "En az bir büyük harf içermelidir.")
+  //     .matches(/[!,?{}><%&$#£+-.]+/, "En az bir özel karekter içermelidir."),
+  //   first_name: string().min(8),
+  //   last_name: string().min(8),
+  //   username: string().min(8),
+  // })
   return (
     <Container maxWidth="lg">
       <Grid
@@ -51,49 +76,88 @@ const Register = () => {
             Register
           </Typography>
 
-          <Box
-            component="form"
-            sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+          <Formik
+            initialValues={{
+              username: "",
+              first_name: "",
+              last_name: "",
+              email: "",
+              password: "",
+            }}
+            
+            onSubmit={(values, actions) => {
+              console.log("formsubmit");
+              register({ ...values, password2: values.password })
+              actions.resetForm()
+              actions.setSubmitting(false)
+            }}
           >
-            <TextField
-              label="User Name"
-              name="username"
-              id="userName"
-              type="text"
-              variant="outlined"
-            />
-            <TextField
-              label="First Name"
-              name="first_name"
-              id="firstName"
-              type="text"
-              variant="outlined"
-            />
-            <TextField
-              label="Last Name"
-              name="last_name"
-              id="last_name"
-              type="text"
-              variant="outlined"
-            />
-            <TextField
-              label="Email"
-              name="email"
-              id="email"
-              type="email"
-              variant="outlined"
-            />
-            <TextField
-              label="password"
-              name="password"
-              id="password"
-              type="password"
-              variant="outlined"
-            />
-            <Button type="submit" variant="contained" size="large">
-              Submit
-            </Button>
-          </Box>
+            {/* buradaki touched ve error labeldaki hatalari calistiran fonksiyon */}
+
+            {({ handleChange, handleBlur, values  }) => (
+              <Form >
+                <Box 
+                  sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                  <TextField
+                    label="User Name"
+                    name="username"
+                    id="userName"
+                    type="text"
+                    variant="outlined"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.username}
+                    
+
+                  />
+                  <TextField
+                    label="First Name"
+                    name="first_name"
+                    id="firstName"
+                    type="text"
+                    variant="outlined"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.first_name}
+                  />
+                  <TextField
+                    label="Last Name"
+                    name="last_name"
+                    id="last_name"
+                    type="text"
+                    variant="outlined"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.last_name}
+                  />
+                  <TextField
+                    label="Email"
+                    name="email"
+                    id="email"
+                    type="email"
+                    variant="outlined"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                  />
+                  <TextField
+                    label="password"
+                    name="password"
+                    id="password"
+                    type="password"
+                    variant="outlined"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.password}
+                  />
+                  <Button type="submit" variant="contained" size="large">
+                    Submit
+                  </Button>
+                </Box>
+              </Form>
+            )}
+          </Formik>
+
 
           <Box sx={{ textAlign: "center", mt: 2 }}>
             <Link to="/">Do you have an account?</Link>
