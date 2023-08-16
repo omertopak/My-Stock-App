@@ -22,7 +22,7 @@ const useStockCall = () => {
                 headers: { Authorization: `Token ${token}` },
             }
         ) 
-        console.log(data);
+        // console.log(data);
         dispatch(getStockSuccess(data))
         toastSuccessNotify("firma işlemi başarılı")
     } catch (error) {

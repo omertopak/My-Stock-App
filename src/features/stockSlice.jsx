@@ -6,7 +6,7 @@ const stockSlice = createSlice({
   initialState: {
     loading: false,
     error: false,
-    stockk:[]
+    stocks:[]
   },
   reducers: {
     fetchStart: (state) => {
@@ -15,7 +15,7 @@ const stockSlice = createSlice({
     },
     getStockSuccess:(state,{payload})=>{
         state.loading = false
-      state.stockk = payload?.data 
+      state.stocks = payload
     },
     fetchFail: (state) => {
       state.loading = false;

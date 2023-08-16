@@ -6,7 +6,7 @@ import {red} from '@mui/material/colors'
 import { useSelector } from "react-redux"
 
 const Firms = () => {
-  const { stockk } = useSelector((state) => state.stock)
+  const { stocks } = useSelector((state) => state.stock)
   const {getStockData} = useStockCall()
   // useEffect(()=>{
   //   getStockSuccess()
@@ -15,8 +15,9 @@ const Firms = () => {
   useEffect(() => {
     // getFirms()
     getStockData()
+    
   }, [])
-  console.log(stockk);
+  console.log(stocks);
   const color = red[900]
   return (
   <div>
@@ -25,13 +26,19 @@ const Firms = () => {
       <Button variant="contained" size="small" >+ New Firm</Button>
     </Stack>
     <Stack>
-    {stockk?.map((firm)=>(
-      
-        <Stack key={firm.id}>
-          <FirmCard firm={firm}/>
+  
+        <Stack 
+        direction="raw"
+        justifyContent="space-evenly"
+        useFlexGap
+        > 
+        {stocks?.map((firm)=>(
+          <FirmCard  firm={firm} /> 
+          ))}
+
         </Stack>
         
-      ))}
+     
     </Stack>
   </div>
   )
