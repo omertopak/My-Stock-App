@@ -11,13 +11,24 @@ export default function FirmCard({firm}) {
   //console.log(firm);
   return (
     <Stack  key={firm.id} 
+    sx={{
+      p: 2,
+      width: "300px",
+      height: "400px",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      alignItems: "center",
+    }}
     >
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
+          width="280px"
           image={firm.image}
           alt="green iguana"
+          sx={{objectFit:"contain"}}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">

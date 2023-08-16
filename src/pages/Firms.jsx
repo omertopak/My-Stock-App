@@ -31,6 +31,8 @@ const Firms = () => {
         direction="raw"
         justifyContent="space-evenly"
         useFlexGap
+        spacing={2}
+        flexWrap="wrap"
         > 
         {stocks?.map((firm)=>(
           <FirmCard  firm={firm} /> 
