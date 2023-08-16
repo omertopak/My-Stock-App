@@ -17,32 +17,32 @@ const listOfDash=[
   {
     icon:<DashboardCustomizeIcon />,
     title:"Dashboard",
-    url:"stock/"
+    url:""
   },
   {
     icon:<ShoppingCartIcon />,
     title:"Purchase",
-    url:"stock/purchase/"
+    url:"purchase/"
   },
   {
     icon:<AttachMoneyIcon />,
     title:"Sales",
-    url:"stock/sales/"
+    url:"sales/"
   },
   {
     icon:<StoreIcon />,
     title:"Firms",
-    url:"stock/firms/"
+    url:"firms/"
   },
   {
     icon:<StarsIcon />,
     title:"Products",
-    url:"stock/products"
+    url:"products/"
   },
   {
     icon:<InventoryIcon />,
     title:"Brands",
-    url:"stock/brands"
+    url:"brands/"
   },
   {
     icon:<SupervisorAccountIcon />,
@@ -59,16 +59,21 @@ const MenuListItems = () => {
     <Box sx={{ width: '100%', maxWidth: 360, }}>
       {listOfDash.map((item,index)=>(
      
-        <List>
+        <List key={index}>
           <ListItem 
-         key={index}
+          
           disablePadding
           sx={{color:"white",
           "& .MuiSvgIcon-root": { color: "white" },
           "&:hover": { color: "red" },
           "&:hover .MuiSvgIcon-root": { color: "red" },
             }}
-
+          // onClick={()=>{navigate(item.url)}}  
+          onClick={() => {
+            item.url.includes("http" || "www")
+              ? window.open(item.url, "_blank")
+              : navigate(item.url)
+          }}
           >
             <ListItemButton>
               <ListItemIcon>
