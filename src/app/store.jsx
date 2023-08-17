@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit"
+import { configureStore,getDefaultMiddleware } from "@reduxjs/toolkit"
 import authReducer from '../features/authSlice'
 import stockReducer from '../features/stockSlice'
 import { persistStore, persistReducer } from 'redux-persist'
@@ -17,6 +17,9 @@ const store = configureStore({
     stock: stockReducer,
   },
    devTools: process.env.NODE_ENV !== "production",
+   middleware:getDefaultMiddleware({
+    serializableCheck:false,
+   })
 })
 
 export const persistor = persistStore(store)
