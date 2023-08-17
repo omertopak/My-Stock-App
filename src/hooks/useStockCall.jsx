@@ -59,8 +59,7 @@ const useStockCall = () => {
   const postStockData = async (url, info) => {
     dispatch(fetchStart())
     try {
-      await axios.delete(
-        `${import.meta.env.VITE_BASE_URL}stock/${url}/${id}/`, info)
+      await axios.delete(`${import.meta.env.VITE_BASE_URL}stock/${url}/`, info)
       toastSuccessNotify(`${url} succesfuly posted`)
       getStockData(url)
     } catch (error) {
