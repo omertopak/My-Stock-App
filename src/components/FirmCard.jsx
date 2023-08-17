@@ -7,6 +7,8 @@ import { Button, CardActionArea, CardActions, Stack } from '@mui/material';
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline"
 import EditIcon from "@mui/icons-material/Edit"
 import useStockCall from '../hooks/useStockCall';
+
+
 export default function FirmCard({firm,handleOpen,setInfo}) {
   //console.log(firm);
   const { deleteStockData } = useStockCall()
@@ -55,7 +57,7 @@ export default function FirmCard({firm,handleOpen,setInfo}) {
             />
           <DeleteOutlineIcon
             sx={{"&:hover": { color: "red", cursor: "pointer" }}}
-            onClick={() => deleteStockData("firms", firm.id)}
+            onClick={() => console.log(firm)}
             />
 
           

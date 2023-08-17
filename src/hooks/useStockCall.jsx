@@ -1,6 +1,5 @@
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
-// import { useNavigate } from "react-router-dom"
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify"
 import { getStockSuccess, fetchStart,fetchFail } from "../features/stockSlice";
 
@@ -12,6 +11,7 @@ const useStockCall = () => {
     // const navigate = useNavigate()
     const {token} = useSelector((state)=>state.auth)
     // console.log(token);
+
 
 
    const getStockData = async(url) =>{
@@ -33,11 +33,18 @@ const useStockCall = () => {
         fetchFail()
     }
    }
+
+
+
    const deleteStockData = async (url, id) => {
     dispatch(fetchStart())
     try {
       await axios.delete(
-        `${import.meta.env.VITE_BASE_URL}stock/${url}/${id}/`)
+        `${import.meta.env.VITE_BASE_URL}stock/${url}/${id}/`, 
+        {
+            headers: { Authorization: `Token ${token}` },
+        }
+    ) 
       toastSuccessNotify(`${url} succesfuly deleted`)
       getStockData(url)
     } catch (error) {
@@ -46,6 +53,9 @@ const useStockCall = () => {
       console.log(error)
     }
   }
+
+
+
   const postStockData = async (url, info) => {
     dispatch(fetchStart())
     try {
@@ -59,6 +69,9 @@ const useStockCall = () => {
       console.log(error)
     }
   }
+
+
+
    const updateStockData = async(url,info) =>{
     dispatch(fetchStart())
     
@@ -74,6 +87,7 @@ const useStockCall = () => {
     }
    }
    
+
 
   return {getStockData,deleteStockData,updateStockData,postStockData }
 };
