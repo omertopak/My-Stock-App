@@ -2,7 +2,8 @@ import axios from "axios"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify"
-import { fetchStart,loginSuccess,registerSuccess } from "../features/authSlice"
+import { fetchStart,loginSuccess,registerSuccess, fetchFail, logoutSuccess} from "../features/authSlice"
+import {  } from "../features/stockSlice"
 
 
 const useAuthCall = () => {
@@ -22,6 +23,7 @@ const useAuthCall = () => {
         toastSuccessNotify("Login işlemi başarılı")
     } catch (error) {
         console.log(error);
+        dispatch(fetchFail())
         toastErrorNotify("Error")
     }
    }
@@ -40,11 +42,28 @@ const useAuthCall = () => {
         toastSuccessNotify("Hesap oluşturuldu")    
     } catch (error) {
         console.log(error);
+        dispatch(fetchFail())
         toastErrorNotify("Error")
     }
    }
 
-  return {login,register}
+
+   const logout = async() =>{
+    dispatch(fetchStart())
+    try {
+        const {data} = await axios.post(
+            `${import.meta.env.VITE_BASE_URL}account/auth/logout/`) 
+        dispatch(logoutSuccess())
+        navigate("/")
+        toastSuccessNotify("Logout işlemi başarılı")
+    } catch (error) {
+        console.log(error);
+        dispatch(fetchFail())
+        toastErrorNotify("Error")
+    }
+   }
+
+  return {login,register, logout}
 };
 
 export default useAuthCall;

@@ -21,6 +21,7 @@ function Dashboard(props) {
   
   const { window } = props
   const [mobileOpen, setMobileOpen] = React.useState(false)
+  const { logout } = useAuthCall()
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
@@ -61,7 +62,7 @@ function Dashboard(props) {
             Stock App
           </Typography>
 
-          <Button>
+          <Button sx={{color:"white"}} onClick={()=>logout()}>
             Logout
           </Button>
         </Toolbar>

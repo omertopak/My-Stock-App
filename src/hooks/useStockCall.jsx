@@ -33,11 +33,49 @@ const useStockCall = () => {
         fetchFail()
     }
    }
-
-
+   const deleteStockData = async (url, id) => {
+    dispatch(fetchStart())
+    try {
+      await axios.delete(
+        `${import.meta.env.VITE_BASE_URL}stock/${url}/${id}/`)
+      toastSuccessNotify(`${url} succesfuly deleted`)
+      getStockData(url)
+    } catch (error) {
+      dispatch(fetchFail())
+      toastErrorNotify(`${url} can not be deleted`)
+      console.log(error)
+    }
+  }
+  const postStockData = async (url, info) => {
+    dispatch(fetchStart())
+    try {
+      await axios.delete(
+        `${import.meta.env.VITE_BASE_URL}stock/${url}/${id}/`, info)
+      toastSuccessNotify(`${url} succesfuly posted`)
+      getStockData(url)
+    } catch (error) {
+      dispatch(fetchFail())
+      toastErrorNotify(`${url} can not be posted`)
+      console.log(error)
+    }
+  }
+   const updateStockData = async(url,info) =>{
+    dispatch(fetchStart())
+    
+    try {
+        await axios.put(
+            `${import.meta.env.VITE_BASE_URL}stock/${url}/${info.id}`, info
+        ) 
+        getStockData(url)    
+        toastSuccessNotify("Updated")
+    } catch (error) {
+       fetchFail()
+        toastErrorNotify(`${url} cannot be updated`)
+    }
+   }
    
 
-  return {getStockData }
+  return {getStockData,deleteStockData,updateStockData,postStockData }
 };
 
 export default useStockCall;

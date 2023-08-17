@@ -6,9 +6,12 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions, Stack } from '@mui/material';
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline"
 import EditIcon from "@mui/icons-material/Edit"
-
-export default function FirmCard({firm}) {
+import useStockCall from '../hooks/useStockCall';
+export default function FirmCard({firm,handleOpen,setInfo}) {
   //console.log(firm);
+  const { deleteStockData } = useStockCall()
+
+
   return (
     <Stack  key={firm.id} 
     sx={{
@@ -43,10 +46,20 @@ export default function FirmCard({firm}) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          <DeleteOutlineIcon/>
-          <EditIcon/>
-        </Button>
+          <EditIcon
+            sx={{"&:hover": { color: "red", cursor: "pointer" }}}
+            onClick={() => {
+              handleOpen()
+              // setInfo(firm)
+            }}
+            />
+          <DeleteOutlineIcon
+            sx={{"&:hover": { color: "red", cursor: "pointer" }}}
+            onClick={() => deleteStockData("firms", firm.id)}
+            />
+
+          
+        
         
       </CardActions>
     </Stack>
