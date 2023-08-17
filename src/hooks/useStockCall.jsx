@@ -12,18 +12,20 @@ const useStockCall = () => {
     // const navigate = useNavigate()
     const {token} = useSelector((state)=>state.auth)
     // console.log(token);
-   const getStockData = async() =>{
+
+
+   const getStockData = async(url) =>{
     dispatch(fetchStart())
     
     try {
         const {data} = await axios.get(
-            `${import.meta.env.VITE_BASE_URL}stock/firms/`, 
+            `${import.meta.env.VITE_BASE_URL}stock/${url}/`, 
             {
                 headers: { Authorization: `Token ${token}` },
             }
         ) 
         // console.log(data);
-        dispatch(getStockSuccess(data))
+        dispatch(getStockSuccess({data,url}))
         toastSuccessNotify("firma işlemi başarılı")
     } catch (error) {
         console.log(error);
