@@ -9,7 +9,7 @@ import { useState } from "react"
 
 
 const Products = () => {
-  const { products } = useSelector((state) => state.stock)
+  // const { categories,brands } = useSelector((state) => state.stock)
   const { getStockData } = useStockCall()
   
   // console.log(firms);
@@ -17,25 +17,30 @@ const Products = () => {
 
 
    const [info, setInfo] = useState({
-    category: "",
-    brands: "",
-    product: "",
-    
-   }) 
+        name: "",
+        category_id: "",
+        brand_id: "",
+      }) 
   // modal
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false)
-    setInfo({ name: "", phone: "", address: "", image: "" })
+    setInfo({ 
+      name: "",
+      category_id: "",
+      brand_id: "",
+    })
   };
 
 
   useEffect(() => {
       // getFirms()
+      getStockData("categories")
+      getStockData("brands")
       getStockData("products")
-
+     
     }, [])
   return (
     <div>

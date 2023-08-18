@@ -12,7 +12,7 @@ import useStockCall from '../hooks/useStockCall';
 export default function FirmCard({firm,handleOpen,setInfo}) {
   //console.log(firm);
   const { deleteStockData } = useStockCall()
-
+  const { getStockData } = useStockCall()
 
   return (
     <Stack  key={firm.id} 
@@ -53,6 +53,7 @@ export default function FirmCard({firm,handleOpen,setInfo}) {
             onClick={() => {
               handleOpen()
               setInfo(firm)
+              getStockData("firm")
             }}
             />
           <DeleteOutlineIcon

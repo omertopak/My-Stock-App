@@ -12,7 +12,7 @@ import useStockCall from '../hooks/useStockCall';
 export default function BrandCard({brand,handleOpen,setInfo}) {
   //console.log(brand);
   const { deleteStockData } = useStockCall()
-
+  const { getStockData } = useStockCall()
 
   return (
     <Stack  key={brand.id} 
@@ -47,6 +47,7 @@ export default function BrandCard({brand,handleOpen,setInfo}) {
             onClick={() => {
               handleOpen()
               setInfo(brand)
+              getStockData("brand")
             }}
             />
           <DeleteOutlineIcon

@@ -28,7 +28,7 @@ const useStockCall = () => {
         
     } catch (error) {
         console.log(error);
-        toastErrorNotify(`${url} couldn't fetched.`)
+        //toastErrorNotify(`${url} couldn't fetched.`)
         fetchFail()
     }
    }
@@ -44,11 +44,11 @@ const useStockCall = () => {
             headers: { Authorization: `Token ${token}` },
         }
     ) 
-      toastSuccessNotify(`${url} succesfuly deleted`)
+      // toastSuccessNotify(`${url} succesfuly deleted`)
       getStockData(url)
     } catch (error) {
       dispatch(fetchFail())
-      toastErrorNotify(`${url} can not be deleted`)
+      //toastErrorNotify(`${url} can not be deleted`)
       console.log(error)
     }
   }
@@ -64,11 +64,11 @@ const useStockCall = () => {
             headers: { Authorization: `Token ${token}` },
         }
     ) 
-      toastSuccessNotify(`${url} succesfuly posted`)
+      // toastSuccessNotify(`${url} succesfuly posted`)
       getStockData(url)
     } catch (error) {
       dispatch(fetchFail())
-      toastErrorNotify(`${url} can not be posted`)
+      //toastErrorNotify(`${url} can not be posted`)
       console.log(error)
     }
   }
@@ -86,10 +86,10 @@ const useStockCall = () => {
       })
         
         getStockData(url)    
-        toastSuccessNotify("Updated")
+        // toastSuccessNotify("Updated")
     } catch (error) {
        fetchFail()
-        toastErrorNotify(`${url} cannot be updated`)
+        //toastErrorNotify(`${url} cannot be updated`)
     }
    }
    

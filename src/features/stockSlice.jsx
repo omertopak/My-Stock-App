@@ -20,7 +20,7 @@ const stockSlice = createSlice({
     },
     getStockSuccess:(state,{payload})=>{
         state.loading = false
-      state[payload.url] = payload.data
+      state[payload.url] = payload?.data
     },
     fetchFail: (state) => {
       state.loading = false;

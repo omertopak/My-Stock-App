@@ -52,16 +52,16 @@ const Firms = () => {
         setInfo={setInfo}
       />  
       <Stack>
-
-        <Stack
-          direction="raw"
-          justifyContent="space-evenly"
-          useFlexGap
-          spacing={2}
-          flexWrap="wrap"
-        >
+      <Stack
+        direction="raw"
+        justifyContent="space-evenly"
+        useFlexGap
+        spacing={2}
+        flexWrap="wrap"
+      >
           {firms?.map((firm) => (
             <FirmCard 
+              key={firm.id}
               firm={firm}
               handleOpen={handleOpen}
               info={info}

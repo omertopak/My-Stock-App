@@ -5,7 +5,8 @@ import Modal from "@mui/material/Modal"
 import useStockCall from "../hooks/useStockCall"
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-
+import { useSelector } from "react-redux"
+import InputLabel from '@mui/material/InputLabel';
 
 export default function ProductModal({info,setInfo,open,handleClose}) {
   const style={
@@ -19,13 +20,18 @@ export default function ProductModal({info,setInfo,open,handleClose}) {
     boxShadow: 24,
     p: 4,
   }
-  const { postStockData} = useStockCall()
 
+
+  const { postStockData} = useStockCall()
+  const {categories,brands} = useSelector((state)=>state.stock)
+//   console.log(brands);
+
+  
   const handleSubmit = (e)=>{
     console.log(info);
     e.preventDefault()
-    console.log(info.id)
-    postStockData("Products",info)
+    //console.log(info.id)
+    postStockData("products",info)
     handleClose()
   }
   const handleChange = (e)=>{
@@ -46,24 +52,39 @@ export default function ProductModal({info,setInfo,open,handleClose}) {
             onSubmit={handleSubmit}
           >
           {/* Selectbox kismi */}
-          
+          <InputLabel id="categories">Categories</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          variant="outlined"
-          name="category"
-          value={""}
-          label="Category"
+          labelId="categories"
+          id="categories"
+          name="category_id"
+          value={info?.category_id}
+          
           onChange={handleChange}
         >
-          <MenuItem value={10}>Ten</MenuItem>
-        
+           {categories?.map(({name,id})=>
+            <MenuItem key={id} value={id}>{name}</MenuItem>
+           )} 
+        </Select>
+
+        <InputLabel id="brands">Brands</InputLabel>
+        <Select
+          labelId="brands"
+          id="brands"
+          name="brand_id"
+          value={info?.brand_id}
+          onChange={handleChange}
+        >
+           {brands?.map(({name,id})=>
+            <MenuItem key={id} value={id}>{name}</MenuItem>
+           )} 
         </Select>
         
+        <InputLabel id="Product Name">Product Name</InputLabel>
           <TextField 
+            labelId="Product Name"
             id="name" 
             name="name"
-            label="Product Name" 
+            // label="Product Name" 
             variant="outlined"
             type="text"
             value={info?.name}
