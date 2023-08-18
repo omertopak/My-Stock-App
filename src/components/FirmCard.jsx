@@ -52,12 +52,12 @@ export default function FirmCard({firm,handleOpen,setInfo}) {
             sx={{"&:hover": { color: "red", cursor: "pointer" }}}
             onClick={() => {
               handleOpen()
-              // setInfo(firm)
+              setInfo(firm)
             }}
             />
           <DeleteOutlineIcon
             sx={{"&:hover": { color: "red", cursor: "pointer" }}}
-            onClick={() => console.log(firm)}
+            onClick={() => deleteStockData("firms",firm.id)}
             />
 
           

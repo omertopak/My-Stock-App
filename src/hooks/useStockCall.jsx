@@ -24,12 +24,11 @@ const useStockCall = () => {
                 headers: { Authorization: `Token ${token}` },
             }
         ) 
-        // console.log(data);
         dispatch(getStockSuccess({data,url}))
-        toastSuccessNotify("firma işlemi başarılı")
+        
     } catch (error) {
         console.log(error);
-        toastErrorNotify("Error")
+        toastErrorNotify(`${url} couldn't fetched.`)
         fetchFail()
     }
    }
@@ -59,7 +58,12 @@ const useStockCall = () => {
   const postStockData = async (url, info) => {
     dispatch(fetchStart())
     try {
-      await axios.delete(`${import.meta.env.VITE_BASE_URL}stock/${url}/`, info)
+      await axios.post(
+        `${import.meta.env.VITE_BASE_URL}stock/${url}/`,info, 
+        {
+            headers: { Authorization: `Token ${token}` },
+        }
+    ) 
       toastSuccessNotify(`${url} succesfuly posted`)
       getStockData(url)
     } catch (error) {
@@ -68,16 +72,19 @@ const useStockCall = () => {
       console.log(error)
     }
   }
-
+  
 
 
    const updateStockData = async(url,info) =>{
     dispatch(fetchStart())
     
     try {
-        await axios.put(
-            `${import.meta.env.VITE_BASE_URL}stock/${url}/${info.id}`, info
-        ) 
+      axios.put(
+        `${import.meta.env.VITE_BASE_URL}stock/${url}/${info.id}/`,info, 
+      {
+          headers: { Authorization: `Token ${token}` },
+      })
+        
         getStockData(url)    
         toastSuccessNotify("Updated")
     } catch (error) {

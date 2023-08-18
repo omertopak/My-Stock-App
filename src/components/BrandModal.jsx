@@ -24,9 +24,11 @@ export default function BrandModal({info,setInfo,open,handleClose}) {
     console.log(info.id)
     if (info.id) {
       console.log("update");  
-      updateStockData("brads", info)
+      console.log(info);
+      updateStockData("brands", info)
     } else {
       console.log("new brand");
+      console.log(info);
       postStockData("brands", info)
     }
 

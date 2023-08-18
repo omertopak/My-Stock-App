@@ -29,18 +29,15 @@ export default function BrandCard({brand,handleOpen,setInfo}) {
       <CardActionArea>
         <CardMedia
           component="img"
-          height="140"
+          height="240"
           width="280px"
           image={brand.image}
           alt="green iguana"
           sx={{objectFit:"contain"}}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography align='center' justifyContent="center" gutterBottom variant="h5" component="div">
             {brand.name}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {brand.image}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -49,7 +46,7 @@ export default function BrandCard({brand,handleOpen,setInfo}) {
             sx={{"&:hover": { color: "red", cursor: "pointer" }}}
             onClick={() => {
               handleOpen()
-              // setInfo(brand)
+              setInfo(brand)
             }}
             />
           <DeleteOutlineIcon

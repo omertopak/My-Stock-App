@@ -32,7 +32,7 @@ const Brands = () => {
 
 
   useEffect(() => {
-    // getBrands()
+    
     getStockData("brands")
 
   }, [])
