@@ -3,7 +3,6 @@ import { Button, Stack, Typography } from "@mui/material"
 import { red } from '@mui/material/colors'
 import { useEffect } from "react"
 import useStockCall from "../hooks/useStockCall"
-import { useSelector } from "react-redux"
 import ProductModal from "../components/ProductModal"
 import { useState } from "react"
 
