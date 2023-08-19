@@ -1,18 +1,21 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import { DataGrid, GridActionsCellItem,GridToolbar } from '@mui/x-data-grid';
-import { useSelector } from 'react-redux';
-import { DeleteForeverIcon } from '@mui/icons-material/DeleteForever';
-import useStockCall from '../hooks/useStockCall';
-
-
+import * as React from "react"
+import Box from "@mui/material/Box"
+import { DataGrid, GridActionsCellItem, GridToolbar } from "@mui/x-data-grid"
+import { useSelector } from "react-redux"
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever"
+import useStockCall from "../hooks/useStockCall"
 
 export default function ProductTable() {
+  const style = {
+    "&:hover": { color: "red", cursor: "pointer" },
+  }
   const {products} = useSelector((state)=>state.stock)
-  const {deleteStockData} = useStockCall((state)=>state.stock)
+  const {deleteStockData} = useStockCall()
 
   const columns = [
-    { field: 'id', headerName: '#', flex:1,
+    { field: 'id', 
+    headerName: '#', 
+    flex:1,
   },
     {
       field: 'category',
@@ -42,7 +45,6 @@ export default function ProductTable() {
     {
       field: 'stock',
       headerName: 'Stock',
-      description: 'This column has a value getter and is not sortable.',
       sortable: true,
       type: 'number',
       flex:2,
@@ -51,7 +53,7 @@ export default function ProductTable() {
     },
     {
       field: 'actions',
-      type:"action",
+      type:"actions",
       headerName: 'Actions',
       // sortable: false,
       flex:3,
@@ -62,7 +64,7 @@ export default function ProductTable() {
         <GridActionsCellItem
           icon={<DeleteForeverIcon/>}
           label="delete"
-          // sx={style}
+          sx={style}
           onClick={()=>deleteStockData("products",params.id)}
         />
       ]
@@ -76,16 +78,9 @@ export default function ProductTable() {
       <DataGrid
         rows={products}
         columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 10,
-            },
-          },
-        }}
         pageSizeOptions={[10]}
-        checkboxSelection
         disableRowSelectionOnClick
+        slots={{ toolbar: GridToolbar }}
       />
     </Box>
   );
