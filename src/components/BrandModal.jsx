@@ -18,8 +18,10 @@ export default function BrandModal({info,setInfo,open,handleClose}) {
   }
   const { postStockData, updateStockData } = useStockCall()
 
+  
+
   const handleSubmit = (e)=>{
-    console.log(info);
+    // console.log(info);
     e.preventDefault()
     console.log(info.id)
     if (info.id) {
@@ -31,7 +33,6 @@ export default function BrandModal({info,setInfo,open,handleClose}) {
       console.log(info);
       postStockData("brands", info)
     }
-
     handleClose()
   }
   const handleChange = (e)=>{
