@@ -13,9 +13,9 @@ export default function PurchaseTable() {
   const {deleteStockData} = useStockCall()
 
   const columns = [
-    { field: 'id', 
+    { field: 'createds', 
     headerName: 'Date', 
-    flex:1,
+    flex:3,
   },
     {
       field: 'category',
@@ -27,14 +27,14 @@ export default function PurchaseTable() {
     },
     {
       field: 'brand',
-      headerName: 'First Name',
+      headerName: 'product',
       flex:2,
       editable: true,
       align:"center",
       headerAlign:"center"
     },
     {
-      field: 'name',
+      field: 'brand',
       headerName: 'Brand Name',
       type: 'text',
       flex:2,
@@ -43,7 +43,7 @@ export default function PurchaseTable() {
       headerAlign:"center",
     },
     {
-      field: 'stock',
+      field: 'product',
       headerName: 'Product Name',
       sortable: true,
       type: 'number',
@@ -52,7 +52,7 @@ export default function PurchaseTable() {
       headerAlign:"center"
     },
     {
-      field: 'stock',
+      field: 'quantity',
       headerName: 'Quantity',
       sortable: true,
       type: 'number',
@@ -61,8 +61,8 @@ export default function PurchaseTable() {
       headerAlign:"center"
     },
     {
-      field: 'stock',
-      headerName: 'Amount',
+      field: 'price',
+      headerName: 'Price',
       sortable: true,
       type: 'number',
       flex:2,
