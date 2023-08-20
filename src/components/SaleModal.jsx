@@ -1,30 +1,31 @@
-import React from "react"
+import * as React from "react"
 import Box from "@mui/material/Box"
+import Button from "@mui/material/Button"
 import Modal from "@mui/material/Modal"
 import TextField from "@mui/material/TextField"
-import { Button } from "@mui/material"
 import useStockCall from "../hooks/useStockCall"
-import { MenuItem, Select, InputLabel, FormControl } from "@mui/material"
+import InputLabel from "@mui/material/InputLabel"
+import MenuItem from "@mui/material/MenuItem"
+import FormControl from "@mui/material/FormControl"
+import Select from "@mui/material/Select"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-
-export default function PurchaseModal({ open, handleClose, info, setInfo }) {
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-  }
-
-  const navigate = useNavigate()
+export default function SaleModal({ open, handleClose, info, setInfo }) {
+    const modalStyle = {
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        width: 400,
+        bgcolor: "background.paper",
+        border: "2px solid #000",
+        boxShadow: 24,
+        p: 4,
+      }
+  const navigate = useNavigate()    
   const { postStockData, updateStockData } = useStockCall()
-  const { firms, products, brands } = useSelector((state) => state.stock)
+  const { products, brands } = useSelector((state) => state.stock)
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -35,57 +36,29 @@ export default function PurchaseModal({ open, handleClose, info, setInfo }) {
     e.preventDefault()
 
     if (info.id) {
-      updateStockData("purchases", info)
+      updateStockData("sales", info)
     } else {
-      postStockData("purchases", info)
+      postStockData("sales", info)
     }
 
     handleClose()
-    setInfo({})
   }
-
   return (
     <div>
       <Modal
         open={open}
         onClose={() => {
           handleClose()
-          setInfo({})
         }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={modalStyle}>
           <Box
             sx={{ display: "flex", flexDirection: "column", gap: 2 }}
             component="form"
             onSubmit={handleSubmit}
           >
-            <FormControl>
-              <InputLabel variant="outlined" id="firm-select-label">
-                Firm
-              </InputLabel>
-              <Select
-                labelId="firm-select-label"
-                label="Firm"
-                name="firm_id"
-                value={info?.firm_id || ""}
-                onChange={handleChange}
-                required
-              >
-                <MenuItem onClick={() => navigate("/stock/firms")}>
-                  Add New Firm
-                </MenuItem>
-                <hr />
-                {firms?.map((item) => {
-                  return (
-                    <MenuItem key={item.id} value={item.id}>
-                      {item.name}
-                    </MenuItem>
-                  )
-                })}
-              </Select>
-            </FormControl>
             <FormControl>
               <InputLabel variant="outlined" id="brand-select-label">
                 Brand
@@ -99,7 +72,7 @@ export default function PurchaseModal({ open, handleClose, info, setInfo }) {
                 onChange={handleChange}
                 required
               >
-                <MenuItem onClick={() => navigate("/stock/brands")}>
+                <MenuItem onClick={() => navigate("/stock/brands/")}>
                   Add New Brand
                 </MenuItem>
                 <hr />
@@ -161,7 +134,7 @@ export default function PurchaseModal({ open, handleClose, info, setInfo }) {
               required
             />
             <Button type="submit" variant="contained" size="large">
-              {info?.id ? "Update Purchase" : "Add New Purchase"}
+              {info?.id ? "Update Sale" : "Add New Sale"}
             </Button>
           </Box>
         </Box>

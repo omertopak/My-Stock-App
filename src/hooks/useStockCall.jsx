@@ -77,14 +77,12 @@ const useStockCall = () => {
 
    const updateStockData = async(url,info) =>{
     dispatch(fetchStart())
-    
     try {
-      axios.put(
+      await axios.put(
         `${import.meta.env.VITE_BASE_URL}stock/${url}/${info.id}/`,info, 
       {
           headers: { Authorization: `Token ${token}` },
-      })
-        
+      })  
         getStockData(url)    
         // toastSuccessNotify("Updated")
     } catch (error) {
@@ -93,6 +91,7 @@ const useStockCall = () => {
     }
    }
    
+
 
 
   return {getStockData,deleteStockData,updateStockData,postStockData }

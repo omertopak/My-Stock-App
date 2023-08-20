@@ -53,7 +53,7 @@ const Firms = () => {
       />  
       <Stack>
       <Stack
-        direction="raw"
+        direction="row"
         justifyContent="space-evenly"
         useFlexGap
         spacing={2}

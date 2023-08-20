@@ -31,11 +31,11 @@ const Purchases = () => {
 
 
   useEffect(() => {
-      // getFirms()
+      getStockData("products")
       getStockData("categories")
       getStockData("brands")
       getStockData("purchases")
-     
+      getStockData("firms")
     }, [])
   return (
     <div>

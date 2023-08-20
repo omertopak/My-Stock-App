@@ -72,7 +72,7 @@ export default function ProductTable() {
   ];
   
 
-  console.log(products);
+  //console.log(products);
   return (
     <Box sx={{ height: "auto", width: '100%' }}>
       <DataGrid

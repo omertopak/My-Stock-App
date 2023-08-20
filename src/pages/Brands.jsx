@@ -52,14 +52,16 @@ const Brands = () => {
 
       <Stack>
         <Stack
-          direction="raw"
+          direction="row"
           justifyContent="space-evenly"
           useFlexGap
           spacing={2}
           flexWrap="wrap"
           >
           {brands?.map((brand) => (
+            
             <BrandCard
+              key={brand.id}
               brand={brand}
               handleOpen={handleOpen}
               info={info}
