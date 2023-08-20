@@ -1,37 +1,33 @@
-import PurchaseTable from "../components/PurchaseTable"
 import { Button, Stack, Typography } from "@mui/material"
 import { red } from '@mui/material/colors'
-import { useEffect } from "react"
 import useStockCall from "../hooks/useStockCall"
-import PurchaseModal from "../components/PurchaseModal"
+import { useEffect } from "react"
 import { useState } from "react"
+import PurchaseModal from "../components/PurchaseModal"
+import PurchaseTable from "../components/PurchaseTable"
 
 
 const Purchases = () => {
   // const { categories,brands } = useSelector((state) => state.stock)
   const { getStockData } = useStockCall()
-  
+  const [open, setOpen] = useState(false)
   // console.log(firms);
   const color = red[900]
 
 
    const [info, setInfo] = useState({
-        name: "",
-        category_id: "",
-        brand_id: "",
+    brand_id: "",
+    product_id: "",
+    quantity: "",
+    price: "",
       }) 
-  // modal
+  
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => setOpen(true)
   const handleClose = () => {
     setOpen(false)
-    setInfo({ 
-      name: "",
-      category_id: "",
-      brand_id: "",
-    })
-  };
+    setInfo({ brand_id: "", product_id: "", quantity: "", price: "" })
+  }
 
 
   useEffect(() => {
@@ -55,7 +51,7 @@ const Purchases = () => {
         setInfo={setInfo}
       />  
       <Stack></Stack>
-      <PurchaseTable/>
+      <PurchaseTable handleOpen={handleOpen} setInfo={setInfo}/>
     </div>
   )
 }

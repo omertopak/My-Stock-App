@@ -78,7 +78,7 @@ export default function ProductTable() {
       <DataGrid
         rows={products}
         columns={columns}
-        pageSizeOptions={[10]}
+        pageSizeOptions={[10, 20, 50, 100]}
         disableRowSelectionOnClick
         slots={{ toolbar: GridToolbar }}
       />
