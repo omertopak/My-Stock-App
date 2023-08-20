@@ -1,5 +1,11 @@
+import Chart from "../components/Chart"
+import DashCards from "../components/DashCards"
+
 const Home = () => {
-  return <div>Home</div>
+  return <div>
+    <Chart/>
+    <DashCards/>
+  </div>
 }
 
 export default Home
