@@ -20,7 +20,7 @@ export default function FirmModal({info,setInfo,open,handleClose}) {
 
   const handleSubmit = (e)=>{
     e.preventDefault()
-    console.log(info.id)
+    //console.log(info.id)
     if (info.id) {
       updateStockData("firms", info)
     } else {
