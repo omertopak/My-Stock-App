@@ -28,16 +28,14 @@ export default function BrandCard({brand,handleOpen,setInfo}) {
     >
       <CardActionArea>
         <CardMedia
+          image={brand?.image}
+          sx={{ p: 1, objectFit: "contain", height: "250px" }}
           component="img"
-          height="240"
-          width="280px"
-          image={brand.image}
-          alt="green iguana"
-          sx={{objectFit:"contain"}}
+          alt="brand-img"
         />
         <CardContent>
           <Typography align='center' justifyContent="center" gutterBottom variant="h5" component="div">
-            {brand.name}
+            {brand?.name}
           </Typography>
         </CardContent>
       </CardActionArea>

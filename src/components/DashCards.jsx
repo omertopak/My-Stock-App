@@ -54,6 +54,7 @@ const DashCards = () => {
               alignItems: "center",
               justifyContent: "center",
               width: "280px",
+              m: 3,
             }}
             elevation={5}
           >
