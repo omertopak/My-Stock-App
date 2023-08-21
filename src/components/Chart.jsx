@@ -17,7 +17,6 @@ const Chart = () => {
   }))
   const purchasesData = purchases?.map((item) => ({
     date: item.createds,
-    price: item.quantity,
     price: Number(item.price_total),
   }))
 
@@ -32,8 +31,8 @@ const Chart = () => {
             className="mt-4"
             data={salesData}
             index="date"
-            categories={["quantity", "price"]}
-            colors={["red", "blue"]}
+            categories={[ "price","quantity"]}
+            colors={["red", "none"]}
             valueFormatter={dataFormatter}
           />
         </Card>

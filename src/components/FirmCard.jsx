@@ -32,14 +32,15 @@ export default function FirmCard({firm,handleOpen,setInfo}) {
           height="140"
           width="280px"
           image={firm.image}
-          alt="green iguana"
-          sx={{objectFit:"contain"}}
+          sx={{ p: 1, objectFit: "contain", height: 140 }}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {firm.name}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" color="text.secondary"
+          sx={{ p: 1, height: 140 }}
+          >
             {firm.address}
           </Typography>
           <Typography variant="body2" color="text.secondary">
